@@ -1,0 +1,17 @@
+content_assist_disabled_computers=org.eclipse.jdt.ui.textProposalCategory\u0000org.eclipse.recommenders.calls.rcp.proposalCategory.templates\u0000org.eclipse.mylyn.java.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaAllProposalCategory\u0000org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.javaNoTypeProposalCategory\u0000org.eclipse.recommenders.chain.rcp.proposalCategory.chain\u0000
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.util.Iterator"><rhs name\="pobj.tme4.HashMultiSet$HashMultiSetIterator"/></lhs><lhs name\="pobj.util.Chrono"><rhs name\="pobj.util.Chrono"/></lhs><lhs name\="java.util.Collection"><rhs name\="pobj.tme5.MultiSetDecorator"/><rhs name\="pobj.tme5.NaiveMultiSet"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="pobj.tme5.MultiSetDecorator"/><rhs name\="pobj.tme5.NaiveMultiSet"/></lhs><lhs name\="pobj.tme5.MultiSet"><rhs name\="pobj.tme5.MultiSetDecorator"/><rhs name\="pobj.tme5.NaiveMultiSet"/></lhs><lhs name\="pobj.pinboard.editor.commands.Command"><rhs name\="pobj.pinboard.editor.commands.CommandAdd"/><rhs name\="pobj.pinboard.editor.commands.CommandGroup"/></lhs><lhs name\="pobj.pinboard.document.Clip"><rhs name\="pobj.pinboard.document.ClipEllipse"/></lhs><lhs name\="javafx.scene.image.Image"><rhs name\="javafx.scene.image.Image"/></lhs><lhs name\="javafx.scene.input.InputEvent"><rhs name\="javafx.scene.input.KeyEvent"/></lhs><lhs name\="javafx.event.Event"><rhs name\="javafx.scene.input.KeyEvent"/></lhs><lhs name\="java.lang.Cloneable"><rhs name\="javafx.scene.input.KeyEvent"/></lhs><lhs name\="java.util.EventObject"><rhs name\="javafx.scene.input.KeyEvent"/></lhs><lhs name\="pobj.expr.IVisitor"><rhs name\="pobj.expr.VisitorConstant"/><rhs name\="pobj.expr.VisitorEval"/></lhs><lhs name\="pobj.expr.Expression"><rhs name\="pobj.expr.Mult"/></lhs></history>
+content_assist_number_of_computers=19
+content_assist_proposals_background=255,255,255
+content_assist_proposals_foreground=0,0,0
+eclipse.preferences.version=1
+org.eclipse.jdt.ui.exception.name=e
+org.eclipse.jdt.ui.formatterprofiles.version=13
+org.eclipse.jdt.ui.gettersetter.use.is=true
+org.eclipse.jdt.ui.overrideannotation=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

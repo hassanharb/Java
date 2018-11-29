@@ -1,0 +1,20 @@
+
+public class Serpent {
+
+	private double posX, posY;
+	private int direction = 0;
+	
+	public Serpent (double x, double y) {
+		this.posX = x;
+		this.posY = y;
+	}
+	
+	public double getPosX() {
+		return this.posX;
+	}
+	
+	public double getPosY() {
+		return this.posY;
+	}
+	
+}

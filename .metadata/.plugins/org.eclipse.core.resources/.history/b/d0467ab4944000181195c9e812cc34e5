@@ -1,0 +1,10 @@
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Fenetre {
+
+	public Fenetre (Stage stage) {
+		VBox vbox = new VBox ();
+		Canvas canvas = new Canvas (800, 600);
+	}
+}

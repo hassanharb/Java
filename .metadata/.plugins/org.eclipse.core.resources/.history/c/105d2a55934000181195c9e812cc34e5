@@ -1,0 +1,7 @@
+
+public class Serpent {
+
+	private double posX, posY;
+	private int direction;
+	
+}

@@ -1,0 +1,12 @@
+
+public class Field {
+
+	private double dimX, dimY;
+	private Serpent ser;
+	
+	public Field (double dimX, double dimY, Serpent ser) {
+		this.dimX = dimX;
+		this.dimY = dimY;
+		this.ser = ser;
+	}
+}

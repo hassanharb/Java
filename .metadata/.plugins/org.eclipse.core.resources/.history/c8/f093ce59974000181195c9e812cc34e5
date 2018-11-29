@@ -1,0 +1,21 @@
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Fenetre {
+
+	public Fenetre (Stage stage) {
+		VBox vbox = new VBox ();
+		Canvas canvas = new Canvas (800, 600);
+		Scene scene = new Scene(vbox);
+		stage.setScene(scene);
+		vbox.getChildren().add(canvas);
+		Serpent ser = new Serpent (400, 300);
+		canvas.getGraphicsContext2D().fillRect(398, 298, 4, 4);
+		
+		
+		
+		stage.show();
+	}
+}

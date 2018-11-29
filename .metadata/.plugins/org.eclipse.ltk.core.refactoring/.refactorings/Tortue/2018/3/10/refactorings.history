@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;pobj.tme6.ContextTrutle&apos; to &apos;ContextTurtle&apos;&#x0A;- Original project: &apos;Tortue&apos;&#x0A;- Original element: &apos;pobj.tme6.ContextTrutle&apos;&#x0A;- Renamed element: &apos;pobj.tme6.ContextTurtle&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ContextTrutle&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;pobj.tme6{ContextTrutle.java[ContextTrutle" matchStrategy="1" name="ContextTurtle" qualified="false" references="true" similarDeclarations="false" stamp="1520643661515" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,6 @@
+
+public class Field {
+
+	private double dimX, dimY;
+	private Serpent ser;
+}

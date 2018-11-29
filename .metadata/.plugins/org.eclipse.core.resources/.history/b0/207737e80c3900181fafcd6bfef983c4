@@ -1,0 +1,203 @@
+ package pobj.pinboard.editor;
+
+import java.io.File;
+
+import javax.swing.border.TitledBorder;
+
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import pobj.pinboard.document.Board;
+import pobj.pinboard.document.Clip;
+import pobj.pinboard.document.ClipEllipse;
+import pobj.pinboard.document.ClipImage;
+import pobj.pinboard.document.ClipRect;
+import pobj.pinboard.editor.tools.Tool;
+import pobj.pinboard.editor.tools.ToolEllipse;
+import pobj.pinboard.editor.tools.ToolImage;
+import pobj.pinboard.editor.tools.ToolRect;
+import pobj.pinboard.editor.tools.ToolSelection;
+
+public class EditorWindow implements EditorInterface, ClipboardListener {
+
+	
+	private Board board;
+	private Tool tool = null;
+	private Selection selection;
+	private MenuItem past;
+	private Color [] palette = {Color.BLACK, Color.BLUE, Color.RED, Color.AQUA, Color.YELLOW};
+	
+	public EditorWindow (Stage stage) {
+		VBox vbox = new VBox();
+		stage.setTitle("PinBoard-<Untiteled>");
+		//canvas 
+		Canvas canvas = new Canvas(800, 600);
+		
+		
+		//s'enregister auprés de Clipboard
+		Clipboard.getInstance().addListener(this);
+		
+		stage.setOnCloseRequest((event) -> {
+			Clipboard.getInstance().removeListener(this);
+		});
+		//menubar
+		MenuBar munubar = new MenuBar();
+			
+			//menu file
+		Menu file = new Menu("File");
+		MenuItem _new = new MenuItem("New");
+		_new.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle (ActionEvent ae) {new EditorWindow(new Stage());}
+		});
+		
+		MenuItem close = new MenuItem("Close");
+			close.setOnAction( (ae) ->  {Clipboard.getInstance().removeListener(this);stage.close();}
+		);
+		
+		file.getItems().addAll(_new, close);
+		
+			//menu edit
+		Menu edit = new Menu("Edit");
+		MenuItem copy = new MenuItem("copy");
+		copy.setOnAction((ae)-> {
+			Clipboard.getInstance().clear();
+			Clipboard.getInstance().copyToClipboard(this.selection.getContents());
+		});
+		this.past = new MenuItem("past");
+		past.setOnAction((ae) -> {
+			this.board.addClip(Clipboard.getInstance().copyFromClipboard());
+			board.draw(canvas.getGraphicsContext2D());
+		});
+		this.past.setDisable(Clipboard.getInstance().isEmpty());
+		
+		MenuItem delete = new MenuItem("delete");
+		delete.setOnAction((ae) -> {
+			this.board.removeClip(this.selection.getContents());
+			this.selection.getContents().clear();
+			board.draw(canvas.getGraphicsContext2D());
+		});
+		
+		edit.getItems().addAll(copy, past, delete);
+		
+		
+		
+		
+			//menu tools
+		Menu tools = new Menu("Tools");
+		
+		
+		munubar.getMenus().addAll(file, edit, tools);
+		//fin menubar
+		
+		
+		//Label
+		Label label = new Label();
+		
+		//toolbar_1
+		ToolBar toolbar = new ToolBar();
+		Button box = new Button("Box");
+		box.setOnAction((ae) -> {
+				
+			tool = new ToolRect();
+			label.setText(tool.getName(this));
+		});
+		Button ellipse = new Button ("Ellipse");
+		ellipse.setOnAction((ae) -> {
+			tool = new ToolEllipse();
+			label.setText(tool.getName(this));
+		});
+		Button image = new Button ("Image");
+		image.setOnAction( ae -> {
+			FileChooser fc = new FileChooser();
+			fc.setTitle("selectionner image");
+			File selected = fc.showOpenDialog(stage);
+			tool = new ToolImage(selected);
+			label.setText(tool.getName(this));
+		});
+		Button selection = new Button ("selectionner");
+		selection.setOnAction(ae -> {
+			tool = new ToolSelection();
+			label.setText(tool.getName(this));
+		});
+		toolbar.getItems().addAll(box, ellipse, image, selection);
+		
+		//separateur	
+		Separator separateur = new Separator();
+		
+		
+		//toolbar_2
+		ToolBar toolbar_2 = new ToolBar();
+		Button [] couleurs = new Button [this.palette.length];
+		int i = 0;
+		for (Color c : this.palette) {
+			couleurs[i] = new Button();
+			String codeRGB = "000000";
+			couleurs[i].setStyle("-fx-color : #"+codeRGB+" ; -fx-width : 10px ; -fx-height : 10px ;");
+			couleurs[i].setOnAction((e)->{
+				this.board.setColor(c);
+			});
+			i++;
+		}
+		toolbar_2.getItems().addAll(couleurs);
+		
+		board = new Board();
+		this.selection = new Selection();
+		
+		
+			canvas.setOnMousePressed((me) -> {
+				if (tool != null) {
+					tool.press(this, me);
+					tool.drawFeedback(this, canvas.getGraphicsContext2D());
+				}
+			});
+			canvas.setOnMouseDragged((me) -> {
+				if (tool != null) {
+					board.draw(canvas.getGraphicsContext2D());
+					tool.drag(this, me);
+					tool.drawFeedback(this, canvas.getGraphicsContext2D());
+				}
+			});
+			canvas.setOnMouseReleased((me) -> {
+				if (tool != null) {
+					tool.release(this, me);
+					board.draw(canvas.getGraphicsContext2D());
+					tool.drawFeedback(this, canvas.getGraphicsContext2D());
+				}
+			});		
+		
+		
+		board.draw(canvas.getGraphicsContext2D());
+		vbox.getChildren().addAll(munubar, toolbar, canvas, separateur,toolbar_2, label);
+		stage.setScene(new Scene (vbox));
+		stage.show();
+	}
+
+	@Override
+	public Board getBoard() {
+		return this.board;
+	}
+	
+	@Override
+	public Selection getSelection (){
+		return this.selection;
+	}
+
+	@Override
+	public void clipboardChanged() {
+		this.past.setDisable(Clipboard.getInstance().isEmpty());
+	}
+}
